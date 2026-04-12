@@ -1,12 +1,21 @@
 ---
 name: pm-requirement-flow
-description: PM 需求澄清 → 派发开发完整流程。从模糊需求开始，追问澄清到足够清晰，然后派发给 Claude Code 开发，最后独立验收。
+description: PM 需求澄清 → 派发开发完整流程。从模糊需求开始，追问澄清到足够清晰，然后派发给 Claude Code 开发，最后独立验收。Requires: claude-code-dispatch (for task dispatching to Claude Code)
 metadata: {"openclaw": {"emoji": "📋", "always": true}}
 ---
 
 # PM Requirement Flow 📋
 
 从模糊需求到完成开发的完整 PM 流程。
+
+## 依赖
+
+**必须安装：** `claude-code-dispatch`
+
+```bash
+# 安装依赖
+clawdhub install claude-code-dispatch
+```
 
 ## 核心原则
 
