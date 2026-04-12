@@ -1,7 +1,7 @@
 ---
 name: pm-requirement-flow
 description: "PM 工作流。需求澄清 → 派发 → 验收。Yi 平时派需求给 Claude Code 开发的流程，已经跑通了，记录下来方便复用。依赖 claude-code-dispatch。"
-metadata: {"openclaw": {"emoji": "📋", "always": true}}
+metadata: {"openclaw": {"emoji": "📋"}}
 ---
 
 # PM Requirement Flow 📋
@@ -76,6 +76,9 @@ nohup bash ~/.openclaw/workspace/skills/claude-code-dispatch/scripts/dispatch.sh
   --permission-mode bypassPermissions \
   > /tmp/dispatch.log 2>&1 &
 ```
+
+**关于 --permission-mode bypassPermissions：**
+这是 Claude Code 的参数，允许它绕过交互式确认直接执行代码。没有这个参数，Claude Code 在需要用户确认时会卡住，无法实现完全自动化。dispatch.sh 本身是本地脚本，不会上传任何数据。
 
 ### 第六步：验收
 
