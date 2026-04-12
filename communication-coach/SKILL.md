@@ -1,7 +1,7 @@
 ---
 name: communication-coach
 description: "沟通教练。Challenge + 降维表达。Yi 在 EIZ 做 solution architect 经常要给各种人汇报、评审、谈判，试过不少沟通方法，这个是实战中总结出来的。"
-metadata: {"openclaw": {"emoji": "🥊", "always": true}}
+metadata: {"openclaw": {"emoji": "🥊"}}
 ---
 
 # 沟通教练 🥊
@@ -39,6 +39,10 @@ metadata: {"openclaw": {"emoji": "🥊", "always": true}}
 3. 建议的话术调整
 
 不是帮你写稿，是帮你想清楚。
+
+## 触发词
+
+challenge、对练、话术、降维、沟通练习、怎么说、怎么解释、帮我看看这段话怎么说
 
 ---
 
