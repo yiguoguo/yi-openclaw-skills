@@ -1,7 +1,7 @@
 ---
 name: jargon-translator
 description: "黑话翻译器。互联网黑话双向转换 — 大白话包装成职场语言，或者把黑话说成人话。Yi 日常自用，觉得好用就分享出来了。"
-metadata: {"openclaw": {"emoji": "🎭", "always": true}}
+metadata: {"openclaw": {"emoji": "🎭"}}
 ---
 
 # 黑话翻译器 🎭
