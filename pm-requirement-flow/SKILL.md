@@ -1,7 +1,10 @@
 ---
 name: pm-requirement-flow
-description: "PM 工作流。需求澄清 → 派发 → 验收。Yi 平时派需求给 Claude Code 开发的流程，已经跑通了，记录下来方便复用。依赖 claude-code-dispatch。"
+description: "PM 工作流。需求澄清 → 派发 → 验收。依赖 claude-code-dispatch + agency-agents 角色定义。"
 metadata: {"openclaw": {"emoji": "📋"}}
+requires:
+  - claude-code-dispatch
+  - agency-agents (推荐)
 ---
 
 # PM Requirement Flow 📋
@@ -10,10 +13,20 @@ metadata: {"openclaw": {"emoji": "📋"}}
 
 ## 依赖
 
-必须安装 `clawdhub install claude-code-dispatch`
+### 必需
 
-**使用前请先审计 claude-code-dispatch：**
-- 检查 `~/.openclaw/workspace/skills/claude-code-dispatch/scripts/dispatch.sh` 的内容
+- `clawdhub install claude-code-dispatch`
+
+### 推荐
+
+- **agency-agents** - 144+ AI 专家角色定义
+  ```bash
+  cd /Users/wangyi/.openclaw/workspace
+  git clone https://github.com/msitarzewski/agency-agents.git
+  ```
+
+**使用前请先审计：**
+- 检查 `claude-code-dispatch/scripts/dispatch.sh` 的内容
 - 确认来源可信（你自己的本地文件）
 - 了解它会执行什么操作
 
@@ -179,11 +192,18 @@ nohup bash scripts/dispatch.sh \
 
 ## Changelog
 
+### v1.2.0 (2026-04-14)
+- ✨ 添加 agency-agents 集成说明
+- 📝 添加高级用法（角色文件 + SPEC 文件）
+- 📝 添加 PUA 话术模板
+- 🔗 添加笔记站文档链接
+
 ### v1.1.0 (2026-04-14)
 - ✨ 新增 task-tracker 任务追踪
 - 📝 添加 PM 职责说明（不写代码）
 - 📝 添加 Agent Teams 使用时机
 - 📝 添加验收流程（含截图要求）
+- 📝 添加 pm-agent-profile.md（完整角色定义）
 - 🐛 修复 dispatch 输出缓冲问题
 
 ### v1.0.0 (2026-04-12)
@@ -191,6 +211,9 @@ nohup bash scripts/dispatch.sh \
 
 ---
 
-**链接：**
+## 参考链接
+
 - [笔记站文档](https://note.wangyii.com/workflow/pm-updates)
-- [Dispatch 修复说明](https://note.wangyii.com/workflow/dispatch-fix)
+- [agency-agents 集成](https://note.wangyii.com/workflow/agency-agents-integration)
+- [GitHub 仓库](https://github.com/yiguoguo/yi-openclaw-skills)
+- [agency-agents](https://github.com/msitarzewski/agency-agents)
