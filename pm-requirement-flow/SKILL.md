@@ -17,9 +17,24 @@ metadata: {"openclaw": {"emoji": "📋"}}
 - 确认来源可信（你自己的本地文件）
 - 了解它会执行什么操作
 
+---
+
 ## 核心理念
 
-不澄清不派发。需求不清楚的时候多问几句，比开发到一半发现理解错了再返工要快得多。
+### PM 的职责
+1. ✅ 需求澄清
+2. ✅ 写 SPEC
+3. ✅ 派发任务
+4. ✅ 验收结果
+5. ❌ **不写代码**（派给 Claude Code）
+
+### 关键原则
+- **不澄清不派发** — 需求不清楚时多问几句，比返工快
+- **只派活不干活** — PM 不写代码，不自己改 bug
+- **等通知不轮询** — 用 task-tracker 追踪，等 Hook 通知
+- **复杂任务用 Teams** — 大项目用 Agent Teams（开发 + 测试）
+
+---
 
 ## 流程
 
@@ -42,7 +57,7 @@ metadata: {"openclaw": {"emoji": "📋"}}
 
 把需求整理成结构化文档：
 
-```
+```markdown
 # [功能名]
 
 ## 背景
@@ -52,8 +67,8 @@ metadata: {"openclaw": {"emoji": "📋"}}
 谁用 + 痛点
 
 ## 功能
-1. [功能1] - 验收标准
-2. [功能2] - 验收标准
+1. [功能 1] - 验收标准
+2. [功能 2] - 验收标准
 
 ## 边界
 - 包含：...
@@ -75,42 +90,107 @@ metadata: {"openclaw": {"emoji": "📋"}}
 
 ```bash
 nohup bash ~/.openclaw/workspace/skills/claude-code-dispatch/scripts/dispatch.sh \
-  -p "需求：<SPEC内容>" \
+  -p "需求：<SPEC 内容>" \
   -n "功能名" \
   --workdir /项目路径 \
   --permission-mode bypassPermissions \
   > /tmp/dispatch.log 2>&1 &
 ```
 
-**参数说明：**
-
-| 参数 | 说明 |
-|------|------|
-| `--permission-mode bypassPermissions` | Claude Code 原生参数，允许跳过交互确认。没有这个参数，Claude Code 在需要授权时会卡住。 |
-| `--workdir` | 项目路径，由用户在派发时指定，不是任意路径 |
-| `nohup ... &` | 后台运行，实现异步不阻塞 |
-| `> /tmp/dispatch.log` | 日志写到本地 tmp 目录，不上传 |
-
-**安全说明：**
-- dispatch.sh 是本地脚本，不上传数据
-- `--permission-mode bypassPermissions` 是 Claude Code 的内置功能，用于 CI/CD 场景
-- workdir 由你指定，Claude Code 只在你的项目目录操作
-- 使用前请确保 claude-code-dispatch 来源可信
+**dispatch 会自动：**
+- ✅ 添加任务到 task-tracker
+- ✅ 完成后 Hook 通知
+- ✅ 标记任务为 completed
 
 ### 第六步：验收
 
-Claude Code 完成后，独立验收：
-- 检查实际产出
-- 对照 SPEC 逐项核对
-- 运行验证
-- 不轻信"完成了"
+**等待通知：**
+- 完成后 Hook 会自动发 Telegram 通知
+- 用 `task-tracker.sh list` 查看进行中的任务
+- **不要轮询**（exec poll 浪费 token）
 
-通过后告知用户。
+**验收流程：**
+1. 打开部署链接
+2. 逐项测试功能
+3. **截图**（浏览器 screenshot）
+4. 发截图给用户确认
+
+**前端项目验收示例：**
+```bash
+# 打开浏览器
+browser open <URL>
+
+# 截图
+browser screenshot <targetId>
+
+# 发送给用户
+message send --media <screenshot> --message "验收截图：..."
+```
+
+**不通过：** 写 Bug SPEC，重新派发修复。
+
+---
+
+## 任务追踪
+
+**dispatch 自动添加任务到 tracker：**
+```bash
+# 查看进行中的任务
+task-tracker.sh list
+
+# 查看状态（含超时检查）
+task-tracker.sh status
+
+# 标记完成（Hook 自动调用）
+task-tracker.sh complete <task-name>
+```
+
+**超时告警：** 任务超过 30 分钟未完成会自动提醒。
+
+---
+
+## Agent Teams 使用时机
+
+| 场景 | 用 Teams? | 说明 |
+|------|----------|------|
+| 简单修复（如深色模式） | ❌ | 单 Agent 足够 |
+| 新功能开发 | ✅ | 需要 Testing Agent |
+| 多文件重构 | ✅ | 需要多 Agent 协作 |
+| 完整项目 | ✅ | Teams + Testing |
+
+**派发示例（带 Teams）：**
+```bash
+nohup bash scripts/dispatch.sh \
+  -p "开发完整功能..." \
+  --agent-teams \
+  --agents-json '{"reviewer":{"description":"代码审查","prompt":"检查代码质量"}}' \
+  ...
+```
+
+---
 
 ## 触发词
 
-需求、开发、做个东西、帮我做XX、开始项目
+需求、开发、做个东西、帮我做 XX、开始项目
 
 ---
 
 *Yi 自用流程，感觉有用就拿去。使用前请先了解依赖的 claude-code-dispatch skill。*
+
+## Changelog
+
+### v1.1.0 (2026-04-14)
+- ✨ 新增 task-tracker 任务追踪
+- 📝 添加 PM 职责说明（不写代码）
+- 📝 添加 Agent Teams 使用时机
+- 📝 添加验收流程（含截图要求）
+- 🐛 修复 dispatch 输出缓冲问题
+
+### v1.0.0 (2026-04-12)
+- 初始版本
+
+---
+
+**链接：**
+- [笔记站文档](https://note.wangyii.com/workflow/pm-updates)
+- [Dispatch 修复说明](https://note.wangyii.com/workflow/dispatch-fix)
