@@ -13,7 +13,7 @@
 本 Skills 集合的 PM 工作流参考了 [agency-agents](https://github.com/msitarzewski/agency-agents) 的角色定义。
 
 ```bash
-cd /Users/wangyi/.openclaw/workspace
+cd <your-openclaw-workspace>
 git clone https://github.com/msitarzewski/agency-agents.git
 ```
 
