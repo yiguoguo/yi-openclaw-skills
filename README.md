@@ -22,7 +22,7 @@ git clone https://github.com/msitarzewski/agency-agents.git
 - 派发任务时让 Claude 自己读取角色文件
 - 比 prompt 里塞定义更有效
 
-详细使用方法：https://note.wangyii.com/workflow/agency-agents-integration
+详细使用方法：https://note.wangyii.com/workflow/agency-agents-integration.html
 
 ## Skills
 
@@ -88,7 +88,7 @@ dispatch.sh -p "你是 Senior Project Manager 专家。
               成功标准：✅ ... ✅ ... ✅ ..."
 ```
 
-**文档：** https://note.wangyii.com/workflow/agency-agents-integration
+**文档：** https://note.wangyii.com/workflow/agency-agents-integration.html
 
 ## 来源说明
 

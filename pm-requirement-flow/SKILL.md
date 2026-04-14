@@ -213,7 +213,7 @@ nohup bash scripts/dispatch.sh \
 
 ## 参考链接
 
-- [笔记站文档](https://note.wangyii.com/workflow/pm-updates)
-- [agency-agents 集成](https://note.wangyii.com/workflow/agency-agents-integration)
+- [笔记站文档](https://note.wangyii.com/workflow/pm-updates.html)
+- [agency-agents 集成](https://note.wangyii.com/workflow/agency-agents-integration.html)
 - [GitHub 仓库](https://github.com/yiguoguo/yi-openclaw-skills)
 - [agency-agents](https://github.com/msitarzewski/agency-agents)
