@@ -23,6 +23,25 @@ PM 工作流：需求澄清 → 派发 → 验收
 - OpenClaw
 - `claude-code-dispatch`
 
+### ⚠️ macOS 用户注意
+
+如果你遇到 `claude-code-dispatch` 无法运行或输出缓冲问题，请参考修复文档：
+
+**[Dispatch 修复说明](https://note.wangyii.com/workflow/dispatch-fix.html)**
+
+**快速修复：**
+```bash
+# 1. 确保使用 Node v22
+nvm use 22
+
+# 2. 更新 claude-code-dispatch
+cd ~/.openclaw/workspace/skills/claude-code-dispatch
+git pull  # 或重新安装
+
+# 3. 验证
+clawdhub list
+```
+
 ### 推荐
 
 - **agency-agents** - 144+ AI 专家角色定义
